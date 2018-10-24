@@ -529,14 +529,14 @@ class ModelCriteria extends Criteria
             throw new PropelException('You must ask for at least one column');
         }
 
-        if ($columnArray == '*') {
+        if (!is_array($columnArray) && $columnArray == '*') {
             $columnArray = array();
             foreach (call_user_func(array($this->modelPeerName, 'getFieldNames'), BasePeer::TYPE_PHPNAME) as $column) {
                 $columnArray[] = $this->modelName . '.' . $column;
             }
         }
 
-        $this->select = $columnArray;
+        $this->select = (array) $columnArray;
 
         return $this;
     }
