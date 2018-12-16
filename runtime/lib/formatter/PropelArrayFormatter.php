@@ -49,6 +49,13 @@ class PropelArrayFormatter extends PropelFormatter
                 $data[] = &$object;
             }
         }
+
+        if ($class = $this->collectionName) {
+            $collection = new $class($collection);
+            $collection->setModel($this->class);
+            $collection->setFormatter($this);
+        }
+
         $this->currentObjects = array();
         $this->alreadyHydratedObjects = array();
         $stmt->closeCursor();
