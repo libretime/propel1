@@ -1239,6 +1239,7 @@ class Criteria implements IteratorAggregate
      */
     public function setLimit($limit)
     {
+        // TODO: do we enforce int here? 32bit issue if we do
         $this->limit = (int) $limit;
 
         return $this;

@@ -146,6 +146,9 @@ class DBPostgres extends DBAdapter
      */
     public function applyLimit(&$sql, $offset, $limit)
     {
+        $limit = (int) $limit;
+        $offset = (int) $offset;
+
         if ($limit > 0) {
             $sql .= " LIMIT " . $limit;
         }
