@@ -3286,7 +3286,7 @@ abstract class " . $this->getClassname() . " extends " . $parentClass . " ";
             }
             $script .= "
 
-        return " . join(' && ', $tests) . ";";
+        return " . implode(' && ', $tests) . ";";
         }
         $script .= "
     }
