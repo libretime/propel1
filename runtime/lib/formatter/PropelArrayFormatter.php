@@ -25,14 +25,6 @@ class PropelArrayFormatter extends PropelFormatter
     public function format(PDOStatement $stmt)
     {
         $this->checkInit();
-        if ($class = $this->collectionName) {
-            $collection = new $class();
-            $collection->setModel($this->class);
-            $collection->setFormatter($this);
-        } else {
-            $collection = array();
-        }
-
         /**
          * @var $collection PropelArrayCollection
          */
@@ -51,7 +43,7 @@ class PropelArrayFormatter extends PropelFormatter
         }
 
         if ($class = $this->collectionName) {
-            $collection = new $class($collection);
+            $collection = new $class($data);
             $collection->setModel($this->class);
             $collection->setFormatter($this);
         }
