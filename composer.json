@@ -1,5 +1,5 @@
 {
-  "name": "propel/propel1",
+  "name": "dayspring-tech/propel1",
   "description": "Propel is an open-source Object-Relational Mapping (ORM) for PHP5.",
   "keywords": ["orm", "active record", "mapping", "database", "persistence"],
   "homepage": "http://www.propelorm.org/",
@@ -14,6 +14,7 @@
   },
   "include-path": ["runtime/lib", "generator/lib"],
   "require": {
+<<<<<<< HEAD
     "php": "^7.1",
     "phing/phing": "~2.4"
 
@@ -23,18 +24,31 @@
     "phpunit/phpunit": "^9.0.0",
     "phpcompatibility/php-compatibility": "^9.3",
     "squizlabs/php_codesniffer": "^3.5"
+=======
+    "php": "^8.0|^7.4",
+    "phing/phing": "^2.17",
+    "ext-pdo": "*"
   },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.7-dev"
-    }
+  "require-dev": {
+    "phpunit/phpunit": "^9.0.0",
+    "phpcompatibility/php-compatibility": "^9.3",
+    "squizlabs/php_codesniffer": "^3.5",
+    "ext-simplexml": "*",
+    "ext-dom": "*"
+>>>>>>> 73148f83 (compatibility with php 7.4 and 8.x (#4))
   },
+  "replace": {
+    "propel/propel1": "^1.8"
+  },
+<<<<<<< HEAD
   "repositories": [
     {
       "type": "pear",
       "url": "https://pear.php.net"
     }
   ],
+=======
+>>>>>>> 73148f83 (compatibility with php 7.4 and 8.x (#4))
   "bin": ["generator/bin/propel-gen", "generator/bin/propel-gen.bat"],
   "scripts": {
     "post-install-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",

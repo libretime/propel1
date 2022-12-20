@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-require_once dirname(__FILE__).'/sfYaml.php';
+require_once dirname(__FILE__) . '/sfYaml.php';
 
 /**
  * sfYamlInline implements a YAML parser/dumper for the YAML inline syntax.
@@ -79,7 +79,7 @@ class sfYamlInline
       case is_resource($value):
         throw new InvalidArgumentException('Unable to dump PHP resources in a YAML file.');
       case is_object($value):
-        return '!!php/object:'.serialize($value);
+        return '!!php/object:' . serialize($value);
       case is_array($value):
         return self::dumpArray($value);
       case null === $value:
@@ -122,11 +122,8 @@ class sfYamlInline
   {
     // array
     $keys = array_keys($value);
-    if (
-      (1 == count($keys) && '0' == $keys[0])
-      ||
-      (count($keys) > 1 && array_reduce($keys, function($v, $w) { return (integer) $v + $w; }, 0) === count($keys) * (count($keys) - 1) / 2))
-    {
+
+    if (count($value) > 0 && array_values($value) === $value) {
       $output = array();
       foreach ($value as $val) {
         $output[] = self::dump($val);
@@ -170,7 +167,7 @@ class sfYamlInline
         if (false !== $strpos = strpos($output, ' #')) {
           $output = rtrim(substr($output, 0, $strpos));
         }
-      } elseif (preg_match('/^(.+?)('.implode('|', $delimiters).')/', substr($scalar, $i), $match)) {
+      } elseif (preg_match('/^(.+?)(' . implode('|', $delimiters) . ')/', substr($scalar, $i), $match)) {
         $output = $match[1];
         $i += strlen($output);
       } else {
@@ -193,7 +190,7 @@ class sfYamlInline
    */
   protected static function parseQuotedScalar($scalar, &$i)
   {
-    if (!preg_match('/'.self::REGEX_QUOTED_STRING.'/Au', substr($scalar, $i), $match)) {
+    if (!preg_match('/' . self::REGEX_QUOTED_STRING . '/Au', substr($scalar, $i), $match)) {
       throw new InvalidArgumentException(sprintf('Malformed inline YAML string (%s).', substr($scalar, $i)));
     }
 
@@ -249,7 +246,7 @@ class sfYamlInline
           if (!$isQuoted && false !== strpos($value, ': ')) {
             // embedded mapping?
             try {
-              $value = self::parseMapping('{'.$value.'}');
+              $value = self::parseMapping('{' . $value . '}');
             } catch (InvalidArgumentException $e) {
               // no, it's not
             }
@@ -368,7 +365,7 @@ class sfYamlInline
       case in_array(strtolower($scalar), $falseValues):
         return false;
       case is_numeric($scalar):
-        return '0x' == $scalar[0].$scalar[1] ? hexdec($scalar) : floatval($scalar);
+        return '0x' == $scalar[0] . $scalar[1] ? hexdec($scalar) : floatval($scalar);
       case 0 == strcasecmp($scalar, '.inf'):
       case 0 == strcasecmp($scalar, '.NaN'):
         return -log(0);
