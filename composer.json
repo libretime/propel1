@@ -28,6 +28,38 @@
     "generator/lib"
   ],
   "require": {
+    "php": "^7.1",
+    "phing/phing": "~2.4"
+  },
+  "require-dev": {
+    "pear-pear.php.net/pear_packagefilemanager2": "@stable",
+    "phpunit/phpunit": "^9.0.0",
+    "phpcompatibility/php-compatibility": "^9.3",
+    "squizlabs/php_codesniffer": "^3.5"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.7-dev"
+    }
+  },
+  "repositories": [
+    {
+      "name": "William Durand",
+      "email": "william.durand1@gmail.com",
+      "homepage": "http://www.willdurand.fr"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "runtime/lib",
+      "generator/lib"
+    ]
+  },
+  "include-path": [
+    "runtime/lib",
+    "generator/lib"
+  ],
+  "require": {
     "php": "^8.0|^7.4",
     "phing/phing": "^2.17",
     "ext-pdo": "*"
