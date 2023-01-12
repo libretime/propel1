@@ -6,5 +6,4 @@ branches:
 
 services: docker
 
-script:
-  bash docker/run.sh
+script: bash docker/run.sh
