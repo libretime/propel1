@@ -20,5 +20,3 @@ if [ $# = 1 ] ; then
 else
   $PHING_COMMAND -f @DATA-DIR@/propel_generator/pear-build.xml -Dproject.dir=$*
 fi
-
-

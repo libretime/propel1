@@ -122,7 +122,7 @@ class sfYamlInline
   {
     // array
     $keys = array_keys($value);
-    
+
     if (count($value) > 0 && array_values($value) === $value)
     {
       $output = array();

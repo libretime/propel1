@@ -405,7 +405,7 @@ class XmlToAppData
     }
 
     /**
-     * See: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php#L379
+     * See: https://github.com/symfony/symfony/blob/0baa58d4e4bb006c4ae68f75833b586bd3cb6e6f/src/Symfony/Component/Filesystem/Filesystem.php#L446-L462
      */
     protected function isAbsolutePath($file)
     {
