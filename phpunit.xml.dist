@@ -1,31 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-
-<phpunit backupGlobals="false"
-    backupStaticAttributes="false"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    processIsolation="false"
-    stopOnFailure="false"
-    beStrictAboutTestsThatDoNotTestAnything="false"
-    bootstrap="test/bootstrap.php"
-    >
-
-    <testsuites>
-        <testsuite name="Propel Test Suite">
-            <directory>./test/testsuite/</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./runtime/lib/</directory>
-            <directory>./generator/lib/</directory>
-        </whitelist>
-    </filter>
-=======
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" beStrictAboutTestsThatDoNotTestAnything="false" bootstrap="test/bootstrap.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
   <coverage>
     <include>
@@ -38,5 +11,4 @@
       <directory>./test/testsuite/</directory>
     </testsuite>
   </testsuites>
->>>>>>> 73148f83 (compatibility with php 7.4 and 8.x (#4))
 </phpunit>
