@@ -28,7 +28,7 @@
     "generator/lib"
   ],
   "require": {
-    "php": "^8.1.2",
+    "php": ">8.0",
     "phing/phing": "~2.4"
   },
   "require-dev": {
