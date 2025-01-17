@@ -208,7 +208,7 @@ class PropelPDO extends PDO
      *
      * @return boolean
      */
-    public function isInTransaction()
+    public function isInTransaction(): bool
     {
         return ($this->getNestedTransactionCount() > 0);
     }
@@ -219,7 +219,7 @@ class PropelPDO extends PDO
      *
      * @return boolean True if the connection is in a committable transaction
      */
-    public function isCommitable()
+    public function isCommitable(): bool
     {
         return $this->isInTransaction() && !$this->isUncommitable;
     }
@@ -229,7 +229,7 @@ class PropelPDO extends PDO
      *
      * @return boolean
      */
-    public function beginTransaction()
+    public function beginTransaction(): bool
     {
         $return = true;
         if (!$this->nestedTransactionCount) {
@@ -252,7 +252,7 @@ class PropelPDO extends PDO
      *
      * @throws PropelException
      */
-    public function commit()
+    public function commit(): bool
     {
         $return = true;
         $opcount = $this->nestedTransactionCount;
@@ -281,7 +281,7 @@ class PropelPDO extends PDO
      *
      * @return boolean Whether operation was successful.
      */
-    public function rollBack()
+    public function rollBack(): bool
     {
         $return = true;
         $opcount = $this->nestedTransactionCount;
@@ -308,7 +308,7 @@ class PropelPDO extends PDO
      *
      * @return boolean Whether operation was successful.
      */
-    public function forceRollBack()
+    public function forceRollBack(): bool
     {
         $return = true;
 
@@ -339,7 +339,7 @@ class PropelPDO extends PDO
      *
      * @return void
      */
-    public function setAttribute($attribute, $value)
+    public function setAttribute(int $attribute, mixed $value): bool
     {
         switch ($attribute) {
             case self::PROPEL_ATTR_CACHE_PREPARES:
@@ -349,8 +349,9 @@ class PropelPDO extends PDO
                 $this->connectionName = $value;
                 break;
             default:
-                parent::setAttribute($attribute, $value);
+                return parent::setAttribute($attribute, $value);
         }
+        return $attribute & (self::PROPEL_ATTR_CACHE_PREPARES|self::PROPEL_ATTR_CONNECTION_NAME);
     }
 
     /**
@@ -362,7 +363,7 @@ class PropelPDO extends PDO
      *
      * @return mixed
      */
-    public function getAttribute($attribute)
+    public function getAttribute(int $attribute): mixed
     {
         switch ($attribute) {
             case self::PROPEL_ATTR_CACHE_PREPARES:
@@ -389,7 +390,7 @@ class PropelPDO extends PDO
      *
      * @return PDOStatement
      */
-    public function prepare($sql, $driver_options = array())
+    public function prepare($sql, $driver_options = array()): PDOStatement
     {
         if ($this->useDebug) {
             $debug = $this->getDebugSnapshot();
@@ -421,7 +422,7 @@ class PropelPDO extends PDO
      *
      * @return integer
      */
-    public function exec($sql)
+    public function exec(string $sql): int
     {
         if ($this->useDebug) {
             $debug = $this->getDebugSnapshot();
@@ -448,7 +449,7 @@ class PropelPDO extends PDO
      *
      * @return PDOStatement
      */
-    public function query()
+    public function query(string $query, ?int $fetchMode = null, mixed ...$fetchModeArgs): PDOStatement
     {
         if ($this->useDebug) {
             $debug = $this->getDebugSnapshot();
@@ -506,7 +507,7 @@ class PropelPDO extends PDO
      * @throws PropelException if persistent connection is used (since unable to override PDOStatement in that case).
      * @return integer
      */
-    public function getQueryCount()
+    public function getQueryCount(): int
     {
         // extending PDOStatement is not supported with persistent connections
         if ($this->getAttribute(PDO::ATTR_PERSISTENT)) {
@@ -523,7 +524,7 @@ class PropelPDO extends PDO
      *
      * @return integer
      */
-    public function incrementQueryCount()
+    public function incrementQueryCount(): int
     {
         $this->queryCount++;
     }
@@ -533,7 +534,7 @@ class PropelPDO extends PDO
      *
      * @return string Executable SQL code
      */
-    public function getLastExecutedQuery()
+    public function getLastExecutedQuery(): string
     {
         return $this->lastExecutedQuery;
     }
@@ -543,7 +544,7 @@ class PropelPDO extends PDO
      *
      * @param string $query Executable SQL code
      */
-    public function setLastExecutedQuery($query)
+    public function setLastExecutedQuery(string $query): void
     {
         $this->lastExecutedQuery = $query;
     }
@@ -553,7 +554,7 @@ class PropelPDO extends PDO
      *
      * @param boolean $value True to enable debug (default), false to disable it
      */
-    public function useDebug($value = true)
+    public function useDebug($value = true): void
     {
         if ($value) {
             $this->configureStatementClass('DebugPDOStatement', true);
@@ -572,7 +573,7 @@ class PropelPDO extends PDO
      *
      * @param integer $level Value of one of the Propel::LOG_* class constants.
      */
-    public function setLogLevel($level)
+    public function setLogLevel($level): void
     {
         $this->logLevel = $level;
     }
@@ -584,7 +585,7 @@ class PropelPDO extends PDO
      *
      * @param BasicLogger $logger A Logger with an API compatible with BasicLogger (or PEAR Log).
      */
-    public function setLogger($logger)
+    public function setLogger($logger): void
     {
         $this->logger = $logger;
     }

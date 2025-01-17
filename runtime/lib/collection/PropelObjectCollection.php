@@ -138,7 +138,7 @@ class PropelObjectCollection extends PropelCollection
      *
      * @return array
      */
-    public function getArrayCopy($keyColumn = null, $usePrefix = false)
+    public function getArrayCopy($keyColumn = null, $usePrefix = false): array
     {
         if (null === $keyColumn && false === $usePrefix) {
             return parent::getArrayCopy();
@@ -272,7 +272,7 @@ class PropelObjectCollection extends PropelCollection
     /**
      * {@inheritdoc}
      */
-    public function search($element)
+    public function search(mixed $element): mixed
     {
         if ($element instanceof BaseObject) {
             if (null !== $elt = $this->getIdenticalObject($element)) {
@@ -286,7 +286,7 @@ class PropelObjectCollection extends PropelCollection
     /**
      * {@inheritdoc}
      */
-    public function contains($element)
+    public function contains(mixed $element): bool
     {
         if ($element instanceof BaseObject) {
             if (null !== $elt = $this->getIdenticalObject($element)) {

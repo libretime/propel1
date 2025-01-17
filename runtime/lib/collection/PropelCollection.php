@@ -70,7 +70,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return integer
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return (int) $this->getInternalIterator()->key();
     }
@@ -81,7 +81,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return mixed
      */
-    public function getFirst()
+    public function getFirst(): mixed
     {
         $this->getInternalIterator()->rewind();
 
@@ -93,7 +93,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return boolean
      */
-    public function isFirst()
+    public function isFirst(): bool
     {
         return $this->getPosition() == 0;
     }
@@ -104,7 +104,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return mixed
      */
-    public function getPrevious()
+    public function getPrevious(): mixed
     {
         $pos = $this->getPosition();
         if ($pos == 0) {
@@ -121,7 +121,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return mixed
      */
-    public function getCurrent()
+    public function getCurrent(): mixed
     {
         return $this->getInternalIterator()->current();
     }
@@ -132,7 +132,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return mixed
      */
-    public function getNext()
+    public function getNext(): mixed
     {
         $this->getInternalIterator()->next();
 
@@ -145,7 +145,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return mixed
      */
-    public function getLast()
+    public function getLast(): mixed
     {
         $count = $this->count();
         if ($count == 0) {
@@ -162,7 +162,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return boolean
      */
-    public function isLast()
+    public function isLast(): bool
     {
         $count = $this->count();
         if ($count == 0) {
@@ -178,7 +178,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return boolean
      */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return $this->count() == 0;
     }
@@ -188,7 +188,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return boolean
      */
-    public function isOdd()
+    public function isOdd(): bool
     {
         return (boolean) ($this->getInternalIterator()->key() % 2);
     }
@@ -198,7 +198,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return boolean
      */
-    public function isEven()
+    public function isEven(): bool
     {
         return !$this->isOdd();
     }
@@ -213,7 +213,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @throws PropelException
      */
-    public function get($key)
+    public function get(mixed $key): mixed
     {
         if (!$this->offsetExists($key)) {
             throw new PropelException('Unknown key ' . $key);
@@ -227,7 +227,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return mixed The popped element
      */
-    public function pop()
+    public function pop(): mixed
     {
         if ($this->count() == 0) {
             return null;
@@ -244,7 +244,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return mixed The popped element
      */
-    public function shift()
+    public function shift(): mixed
     {
         // the reindexing is complicated to deal with through the iterator
         // so let's use the simple solution
@@ -262,7 +262,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return integer The number of new elements in the array
      */
-    public function prepend($value)
+    public function prepend(mixed $value): int
     {
         // the reindexing is complicated to deal with through the iterator
         // so let's use the simple solution
@@ -280,7 +280,7 @@ class PropelCollection extends ArrayObject implements Serializable
      * @param mixed $key
      * @param mixed $value
      */
-    public function set($key, $value)
+    public function set(mixed $key, mixed $value): void
     {
         $this->offsetSet($key, $value);
     }
@@ -295,7 +295,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @throws PropelException
      */
-    public function remove($key)
+    public function remove(mixed $key): mixed
     {
         if (!$this->offsetExists($key)) {
             throw new PropelException('Unknown key ' . $key);
@@ -321,7 +321,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return boolean
      */
-    public function contains($element)
+    public function contains(mixed $element): bool
     {
         return in_array($element, $this->getArrayCopy(), true);
     }
@@ -333,7 +333,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return mixed Returns the key for the element if it is found in the collection, FALSE otherwise
      */
-    public function search($element)
+    public function search(mixed$element): mixed
     {
         return array_search($element, $this->getArrayCopy(), true);
     }
@@ -365,7 +365,7 @@ class PropelCollection extends ArrayObject implements Serializable
     /**
      * @return string
      */
-    public function serialize()
+    public function serialize(): string
     {
         $repr = array(
             'data'   => $this->getArrayCopy(),
@@ -380,7 +380,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return void
      */
-    public function unserialize($data)
+    public function unserialize(string $data): void
     {
         $repr = unserialize($data);
         $this->exchangeArray($repr['data']);
@@ -395,7 +395,7 @@ class PropelCollection extends ArrayObject implements Serializable
      *
      * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): Iterator
     {
         $this->iterator = new ArrayIterator($this);
 
@@ -405,7 +405,7 @@ class PropelCollection extends ArrayObject implements Serializable
     /**
      * @return ArrayIterator
      */
-    public function getInternalIterator()
+    public function getInternalIterator(): mixed
     {
         if (null === $this->iterator) {
             return $this->getIterator();
