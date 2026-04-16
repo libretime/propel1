@@ -29,6 +29,7 @@
  * @version    $Revision$
  * @package    propel.runtime.query
  */
+#[\AllowDynamicProperties]
 class ModelCriteria extends Criteria
 {
     const MODEL_CLAUSE = "MODEL CLAUSE";
@@ -1487,6 +1488,7 @@ class ModelCriteria extends Criteria
      *
      * @return integer the number of results
      */
+    #[\ReturnTypeWillChange]
     public function count($con = null)
     {
         if ($con === null) {

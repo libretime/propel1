@@ -72,6 +72,7 @@ class PropelConfigurationIterator extends RecursiveIteratorIterator
      * @see       http://www.php.net/RecursiveIteratorIterator
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $current = parent::current();

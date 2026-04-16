@@ -229,6 +229,7 @@ class PropelPDO extends PDO
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function beginTransaction(): bool
     {
         $return = true;
@@ -252,6 +253,7 @@ class PropelPDO extends PDO
      *
      * @throws PropelException
      */
+    #[\ReturnTypeWillChange]
     public function commit(): bool
     {
         $return = true;
@@ -281,6 +283,7 @@ class PropelPDO extends PDO
      *
      * @return boolean Whether operation was successful.
      */
+    #[\ReturnTypeWillChange]
     public function rollBack(): bool
     {
         $return = true;
@@ -390,6 +393,7 @@ class PropelPDO extends PDO
      *
      * @return PDOStatement
      */
+    #[\ReturnTypeWillChange]
     public function prepare($sql, $driver_options = array()): PDOStatement
     {
         if ($this->useDebug) {
@@ -422,6 +426,7 @@ class PropelPDO extends PDO
      *
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function exec(string $sql): int
     {
         if ($this->useDebug) {
@@ -449,6 +454,7 @@ class PropelPDO extends PDO
      *
      * @return PDOStatement
      */
+    #[\ReturnTypeWillChange]
     public function query(string $query, ?int $fetchMode = null, mixed ...$fetchModeArgs): PDOStatement
     {
         if ($this->useDebug) {
@@ -456,11 +462,7 @@ class PropelPDO extends PDO
         }
 
         $args = func_get_args();
-        if (version_compare(PHP_VERSION, '5.3', '<')) {
-            $return = call_user_func_array(array($this, 'parent::query'), $args);
-        } else {
-            $return = call_user_func_array('parent::query', $args);
-        }
+        $return = parent::query(...$args);
 
         if ($this->useDebug) {
             $sql = $args[0];
