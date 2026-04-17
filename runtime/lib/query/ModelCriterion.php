@@ -15,6 +15,7 @@
  * @version    $Revision$
  * @package    propel.runtime.query
  */
+#[\AllowDynamicProperties]
 class ModelCriterion extends Criterion
 {
     protected $clause = '';

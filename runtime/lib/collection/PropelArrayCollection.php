@@ -14,6 +14,7 @@
  * @author     Francois Zaninotto
  * @package    propel.runtime.collection
  */
+#[\AllowDynamicProperties]
 class PropelArrayCollection extends PropelCollection
 {
     protected $workerObject;
@@ -163,6 +164,7 @@ class PropelArrayCollection extends PropelCollection
      *
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function getArrayCopy($keyColumn = null, $usePrefix = false)
     {
         if (null === $keyColumn && false === $usePrefix) {

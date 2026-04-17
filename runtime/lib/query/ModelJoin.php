@@ -14,6 +14,7 @@
  * @author     Francois Zaninotto (Propel)
  * @package    propel.runtime.query
  */
+#[\AllowDynamicProperties]
 class ModelJoin extends Join
 {
     /**
