@@ -33,6 +33,14 @@ class ForeignKey extends XMLElement
     protected $onDelete = '';
 
     /**
+     * Set by ConcreteInheritanceBehavior to flag the synthetic FK it adds
+     * from a child table's copied primary key back to its parent.
+     *
+     * @var bool
+     */
+    public $isParentChild = false;
+
+    /**
      * @var Table
      */
     protected $parentTable;

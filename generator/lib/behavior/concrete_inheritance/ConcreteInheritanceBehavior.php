@@ -32,6 +32,8 @@ class ConcreteInheritanceBehavior extends Behavior
         'excluded_parent_behavior' => 'nested_set',
     );
 
+    protected $builder;
+
     public function modifyTable()
     {
         $table = $this->getTable();

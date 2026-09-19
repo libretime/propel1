@@ -70,11 +70,11 @@ class PgsqlPlatform extends DefaultPlatform
      */
     public function disconnectedEscapeText($text)
     {
-        if (function_exists('pg_escape_string')) {
-            return pg_escape_string($text);
-        } else {
-            return parent::disconnectedEscapeText($text);
-        }
+        // pg_escape_string() requires a live connection since PHP 8.1 (it no
+        // longer falls back to "the last opened connection"), which defeats
+        // the point of a *disconnected* escape - fall back to the generic
+        // SQL-standard quote doubling used when there is no connection.
+        return parent::disconnectedEscapeText($text);
     }
 
     public function getBooleanString($b)

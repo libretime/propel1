@@ -102,7 +102,7 @@ abstract class XMLElement
 
     protected function getDefaultValueForArray($stringValue)
     {
-        $stringValue = trim($stringValue);
+        $stringValue = trim((string) $stringValue);
 
         if (empty($stringValue)) {
             return null;

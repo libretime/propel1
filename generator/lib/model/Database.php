@@ -430,7 +430,7 @@ class Database extends ScopedElement
             }
             $this->tableList[] = $tbl;
             $this->tablesByName[$tbl->getName()] = $tbl;
-            $this->tablesByLowercaseName[strtolower($tbl->getName())] = $tbl;
+            $this->tablesByLowercaseName[strtolower((string) $tbl->getName())] = $tbl;
             $this->tablesByPhpName[$tbl->getPhpName()] = $tbl;
             if ($tbl->getNamespace() !== null && strpos($tbl->getNamespace(), '\\') === 0) {
                 $tbl->setNamespace(substr($tbl->getNamespace(), 1));

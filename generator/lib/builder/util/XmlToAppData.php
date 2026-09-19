@@ -410,6 +410,7 @@ class XmlToAppData
      */
     protected function isAbsolutePath($file)
     {
+        $file = (string) $file;
         if (strspn($file, '/\\', 0, 1)
             || (strlen($file) > 3 && ctype_alpha($file[0])
             && substr($file, 1, 1) === ':'

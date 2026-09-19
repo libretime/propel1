@@ -80,11 +80,13 @@ class NestedSetRecursiveIterator implements RecursiveIterator
         return $this->curNode;
     }
 
+    #[\ReturnTypeWillChange]
     public function hasChildren()
     {
         return $this->curNode->hasChildren();
     }
 
+    #[\ReturnTypeWillChange]
     public function getChildren()
     {
         $method = method_exists($this->curNode, 'retrieveFirstChild') ? 'retrieveFirstChild' : 'getFirstChild';

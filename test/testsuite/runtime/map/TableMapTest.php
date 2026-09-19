@@ -24,6 +24,10 @@ require_once dirname(__FILE__) . '/../../../../runtime/lib/exception/PropelExcep
 class TableMapTest extends \PHPUnit\Framework\TestCase
 {
   protected $databaseMap;
+  protected $tableName;
+  protected $tmap;
+  protected $rmap1;
+  protected $rmap2;
 
   protected function setUp(): void
   {

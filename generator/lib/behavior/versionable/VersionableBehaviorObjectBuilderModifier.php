@@ -34,7 +34,7 @@ class VersionableBehaviorObjectBuilderModifier
     /**
      * @var string
      */
-    protected $objectClassname, $peerClassname;
+    protected $objectClassname, $peerClassname, $queryClassname;
 
     public function __construct(VersionableBehavior $behavior)
     {

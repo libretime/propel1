@@ -240,6 +240,7 @@ abstract class " . $this->getClassname() . " extends " . $this->getObjectBuilder
      *
      * @return NodeIterator
      */
+    #[\\ReturnTypeWillChange]
     public function getIterator()
     {
         return new NestedSetRecursiveIterator(\$this);

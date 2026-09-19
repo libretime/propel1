@@ -41,6 +41,11 @@ class SortableBehaviorQueryBuilderModifier
      */
     protected $peerClassname;
 
+    /**
+     * @var String
+     */
+    protected $queryClassname;
+
     public function __construct($behavior)
     {
         $this->behavior = $behavior;
