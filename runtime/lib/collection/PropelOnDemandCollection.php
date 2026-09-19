@@ -49,7 +49,7 @@ class PropelOnDemandCollection extends PropelCollection
     /**
      * @return PropelOnDemandIterator
      */
-    public function getIterator(): PropelOnDemandIterator 
+    public function getIterator(): PropelOnDemandIterator
     {
         return $this->iterator;
     }
@@ -153,7 +153,7 @@ class PropelOnDemandCollection extends PropelCollection
         throw new PropelException('The On Demand Collection is read only');
     }
 
-    public function exchangeArray(object|array $array): array 
+    public function exchangeArray(object|array $array): array
     {
         throw new PropelException('The On Demand Collection is read only');
     }
