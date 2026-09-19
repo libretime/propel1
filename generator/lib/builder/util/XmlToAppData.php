@@ -43,6 +43,7 @@ class XmlToAppData
     private $currentPackage;
     private $currentXmlFile;
     private $defaultPackage;
+    private $firstPass;
 
     private $encoding;
 
