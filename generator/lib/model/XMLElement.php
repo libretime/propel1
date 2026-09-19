@@ -17,6 +17,10 @@ require_once dirname(__FILE__) . '/VendorInfo.php';
  * @version    $Revision$
  * @package    propel.generator.model
  */
+// Guard against a fatal "Cannot declare class XMLElement, because the name
+// is already in use" under PHP 8's propel-gen/Phing bootstrap, where this
+// file ends up compiled more than once despite the require_once above.
+if (!class_exists('XMLElement', false)) {
 abstract class XMLElement
 {
 
@@ -215,4 +219,5 @@ abstract class XMLElement
     {
         return $this->toString();
     }
+}
 }
