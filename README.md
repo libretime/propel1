@@ -20,6 +20,14 @@ Propel has some nice features you should know about:
 
 Read the [Propel documentation](http://propelorm.org/Propel/).
 
+## Testing
+
+```sh
+make dev # Run once to spin up a test database
+
+make reset test # Run the tests against a clean database
+```
+
 ## License
 
 Propel is an open-source project released under the MIT license. See the `LICENSE` file for more information.

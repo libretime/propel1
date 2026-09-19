@@ -1,0 +1,32 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    command: phpunit
+    # Shares the db container's network namespace so "127.0.0.1" in the
+    # fixtures' DSNs (test/fixtures/*/build.properties, runtime-conf.xml)
+    # resolves to postgres, matching how a GitHub Actions service container
+    # is addressed.
+    network_mode: "service:db"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./:/usr/src/app
+    environment:
+      - STARTUP_COMMAND_1=composer install
+      - STARTUP_COMMAND_2=bash test/reset_tests.sh
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: pg_isready
