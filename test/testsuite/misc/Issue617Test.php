@@ -35,6 +35,16 @@ class Issue617Test extends PlatformDatabaseBuildTimeBase
      */
     public function removeTables()
     {
+        // If setUp() failed before $this->con was assigned (e.g. no MySQL
+        // server available), there's nothing to clean up - and calling a
+        // method on null here would mask that original failure and, worse,
+        // would stop tearDown() from ever reaching parent::tearDown(),
+        // which is what restores Propel's global configuration that setUp()
+        // swapped out. That leaves every later test in the run unable to
+        // find its own datasource.
+        if (!$this->con) {
+            return;
+        }
         $this->con->query('DROP TABLE IF EXISTS `issue617_user`');
         $this->con->query('DROP TABLE IF EXISTS `issue617_group`');
     }
