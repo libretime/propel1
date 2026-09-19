@@ -32,7 +32,6 @@
     "phing/phing": "~2.4"
   },
   "require-dev": {
-    "pear-pear.php.net/pear_packagefilemanager2": "@stable",
     "phpunit/phpunit": "^9.0.0",
     "phpcompatibility/php-compatibility": "^9.3",
     "squizlabs/php_codesniffer": "^3.5"
@@ -42,12 +41,6 @@
       "dev-main": "1.7-dev"
     }
   },
-  "repositories": [
-    {
-      "type": "pear",
-      "url": "https://pear.php.net"
-    }
-  ],
   "bin": [
     "generator/bin/propel-gen",
     "generator/bin/propel-gen.bat"
