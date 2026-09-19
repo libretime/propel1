@@ -70,7 +70,7 @@ class PropelObjectFormatterTest extends BookstoreEmptyTestBase
     {
         $con = Propel::getConnection(BookPeer::DATABASE_NAME);
 
-        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = "Quicksilver"');
+        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = \'Quicksilver\'');
         $formatter = new PropelObjectFormatter();
         $formatter->init(new ModelCriteria('bookstore', 'Book'));
         $books = $formatter->format($stmt);
@@ -86,7 +86,7 @@ class PropelObjectFormatterTest extends BookstoreEmptyTestBase
     {
         $con = Propel::getConnection(BookPeer::DATABASE_NAME);
 
-        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = "foo"');
+        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = \'foo\'');
         $formatter = new PropelObjectFormatter();
         $formatter->init(new ModelCriteria('bookstore', 'Book'));
         $books = $formatter->format($stmt);
@@ -125,7 +125,7 @@ class PropelObjectFormatterTest extends BookstoreEmptyTestBase
     {
         $con = Propel::getConnection(BookPeer::DATABASE_NAME);
 
-        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = "foo"');
+        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = \'foo\'');
         $formatter = new PropelObjectFormatter();
         $formatter->init(new ModelCriteria('bookstore', 'Book'));
         $book = $formatter->formatOne($stmt);
@@ -141,7 +141,7 @@ class PropelObjectFormatterTest extends BookstoreEmptyTestBase
 
         $this->assertEquals(0, $con->getQueryCount());
 
-        $stmt = $con->query('SELECT * FROM author LEFT JOIN book ON (author.id = book.author_id) WHERE author.id = (SELECT author_id FROM book WHERE title = "The Tin Drum 2")');
+        $stmt = $con->query('SELECT * FROM author LEFT JOIN book ON (author.id = book.author_id) WHERE author.id = (SELECT author_id FROM book WHERE title = \'The Tin Drum 2\')');
         $formatter = new PropelObjectFormatter();
 
         $criteria  = new ModelCriteria('bookstore', 'Author');

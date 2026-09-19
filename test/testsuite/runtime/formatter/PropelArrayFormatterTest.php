@@ -59,7 +59,7 @@ class PropelArrayFormatterTest extends BookstoreEmptyTestBase
     {
         $con = Propel::getConnection(BookPeer::DATABASE_NAME);
 
-        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = "Quicksilver"');
+        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = \'Quicksilver\'');
         $formatter = new PropelArrayFormatter();
         $formatter->init(new ModelCriteria('bookstore', 'Book'));
         $books = $formatter->format($stmt);
@@ -77,7 +77,7 @@ class PropelArrayFormatterTest extends BookstoreEmptyTestBase
     {
         $con = Propel::getConnection(BookPeer::DATABASE_NAME);
 
-        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = "foo"');
+        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = \'foo\'');
         $formatter = new PropelArrayFormatter();
         $formatter->init(new ModelCriteria('bookstore', 'Book'));
         $books = $formatter->format($stmt);
@@ -117,7 +117,7 @@ class PropelArrayFormatterTest extends BookstoreEmptyTestBase
     {
         $con = Propel::getConnection(BookPeer::DATABASE_NAME);
 
-        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = "foo"');
+        $stmt = $con->query('SELECT * FROM book WHERE book.TITLE = \'foo\'');
         $formatter = new PropelArrayFormatter();
         $formatter->init(new ModelCriteria('bookstore', 'Book'));
         $book = $formatter->formatOne($stmt);
