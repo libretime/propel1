@@ -731,7 +731,7 @@ class Propel
             }
             $key = constant($key);
 
-            if (is_array($optiondata && isset($optiondata['value']))) {
+            if (is_array($optiondata) && isset($optiondata['value'])) {
                 $value = $optiondata['value'];
             } else {
                 $value = $optiondata;
