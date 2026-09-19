@@ -522,11 +522,9 @@ class PropelPDO extends PDO
     /**
      * Increments the number of queries performed by this DebugPDO instance.
      *
-     * Returns the original number of queries (ie the value of $this->queryCount before calling this method).
-     *
-     * @return integer
+     * @return void
      */
-    public function incrementQueryCount(): int
+    public function incrementQueryCount(): void
     {
         $this->queryCount++;
     }
