@@ -37,8 +37,33 @@ abstract class CmsTestBase extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
+        // If an earlier operation in this test left the connection
+        // uncommittable (a nested rollback under PostgreSQL leaves the real
+        // transaction aborted - see BookstoreTestBase::tearDown()), even this
+        // depopulate() call would fail since PostgreSQL rejects every
+        // statement on an aborted transaction until it's rolled back for
+        // real.
+        if (!$this->con->isCommitable()) {
+            $this->con->forceRollBack();
+            parent::tearDown();
+
+            return;
+        }
+
         CmsDataPopulator::depopulate($this->con);
-        $this->con->commit();
+
+        if ($this->con->isCommitable()) {
+            $this->con->commit();
+        } else {
+            $this->con->forceRollBack();
+        }
+
+        // See BookstoreTestBase::tearDown() for why this is still needed
+        // even after the commit()/forceRollBack() above.
+        if ($this->con->isInTransaction()) {
+            $this->con->forceRollBack();
+        }
+
         parent::tearDown();
     }
 

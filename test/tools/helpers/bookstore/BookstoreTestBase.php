@@ -42,6 +42,33 @@ abstract class BookstoreTestBase extends \PHPUnit\Framework\TestCase
         // ('Cannot commit because a nested transaction was rolled back')
         if ($this->con->isCommitable()) {
             $this->con->commit();
+        } else {
+            // A nested rollback happened during the test (e.g. a save() that
+            // hit a genuine SQL error) and left the connection uncommittable.
+            // A nested PropelPDO::rollBack() only flips a flag - it never
+            // issues a real ROLLBACK - so the underlying transaction is still
+            // open here, and under PostgreSQL (unlike MySQL) it is now
+            // permanently aborted: every further statement on this connection
+            // would fail until a real ROLLBACK is issued. Force one now so
+            // this doesn't leak an open, unusable transaction (and whatever
+            // locks it holds) into every subsequent test sharing this
+            // connection.
+            $this->con->forceRollBack();
+        }
+
+        // Belt-and-suspenders: commit() above only issues a real COMMIT (and
+        // resets the nesting depth to 0) when the depth is exactly 1. If some
+        // code during the test opened a nested transaction that never reached
+        // its matching commit()/rollBack() (e.g. an exception thrown between
+        // the two), the depth stays elevated forever - isCommitable() still
+        // reports true (nothing ever flagged it uncommittable), so commit()
+        // above just silently decrements without ever closing the real,
+        // underlying transaction. Left alone, that leftover open transaction
+        // - and whatever locks it holds - would carry over into every test
+        // that runs after this one on the same connection. Make sure this
+        // test never hands off an open transaction to the next one.
+        if ($this->con->isInTransaction()) {
+            $this->con->forceRollBack();
         }
     }
 }

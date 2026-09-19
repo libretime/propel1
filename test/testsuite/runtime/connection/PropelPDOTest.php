@@ -18,6 +18,23 @@ require_once dirname(__FILE__) . '/../../../tools/helpers/bookstore/BookstoreTes
 class PropelPDOTest extends \PHPUnit\Framework\TestCase
 {
 
+    protected function tearDown(): void
+    {
+        // Several tests here deliberately trigger SQL errors and exercise
+        // nested-transaction rollback paths. If a test errors out (or a
+        // bug in its own assertions throws) before it reaches its own
+        // rollback/commit call, the shared pooled connection can be left
+        // inside an open - and, on Postgres, aborted - transaction. Every
+        // later test that reuses this same connection would then inherit
+        // that broken state, so force it closed here regardless of what
+        // the test body did.
+        $con = Propel::getConnection(BookPeer::DATABASE_NAME);
+        if ($con->isInTransaction()) {
+            $con->forceRollBack();
+        }
+        parent::tearDown();
+    }
+
     public function testSetAttribute()
     {
         $con = Propel::getConnection(BookPeer::DATABASE_NAME);
