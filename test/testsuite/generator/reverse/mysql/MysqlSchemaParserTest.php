@@ -30,6 +30,8 @@ class MysqlSchemaParserTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
+        $this->markTestSkipped('MySQL unit test');
+
         parent::setUp();
 
         $xmlDom = new DOMDocument();

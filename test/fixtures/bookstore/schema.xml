@@ -393,6 +393,9 @@
 		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
 		<column name="abbr" type="VARCHAR" size="5" primaryKey="true" required="true"/>
 		<column name="name" type="VARCHAR" />
+		<unique>
+			<unique-column name="id" />
+		</unique>
 	</table>
 	<table name="release_pool">
 		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
