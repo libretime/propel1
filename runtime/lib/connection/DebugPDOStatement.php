@@ -82,6 +82,8 @@ class DebugPDOStatement extends PDOStatement
                     $boundValue = $this->pdo->quote($boundValue);
                 } elseif (null === $boundValue) {
                     $boundValue = 'NULL';
+                } elseif (is_resource($boundValue)) {
+                    $boundValue = '[LOB value]';
                 }
                 $sql = str_replace($pos, $boundValue, $sql);
             }
