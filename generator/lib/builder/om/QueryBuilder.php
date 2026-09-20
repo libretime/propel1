@@ -170,6 +170,7 @@ class QueryBuilder extends OMBuilder
 
         $script .= "
  */
+#[\AllowDynamicProperties]
 abstract class " . $this->getClassname() . " extends " . $parentClass . "
 {";
     }
