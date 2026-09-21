@@ -1726,7 +1726,7 @@ class CountableAuthor extends Author
     /**
      * {@inheritdoc}
      */
-    public function preSave(PropelPDO $con = null)
+    public function preSave(?PropelPDO $con = null)
     {
         $this->nbCallPreSave++;
 

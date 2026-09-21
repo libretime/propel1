@@ -88,7 +88,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
     {
         $cfc = $col->getPhpName();
         $script .= "
-    protected function load$cfc(PropelPDO \$con = null)
+    protected function load$cfc(?PropelPDO \$con = null)
     {";
     }
 
@@ -398,7 +398,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
      * @return void
      * @throws PropelException - if this object is deleted, unsaved or doesn't have pk match in db
      */
-    public function reload(\$deep = false, PropelPDO \$con = null)
+    public function reload(\$deep = false, ?PropelPDO \$con = null)
     {
         if (\$this->isDeleted()) {
             throw new PropelException(\"Cannot reload a deleted object.\");
@@ -543,7 +543,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
      * @return                 $className The associated $className object.
      * @throws PropelException
      */
-    public function get" . $this->getFKPhpNameAffix($fk, $plural = false) . "(PropelPDO \$con = null)
+    public function get" . $this->getFKPhpNameAffix($fk, $plural = false) . "(?PropelPDO \$con = null)
     {";
         $script .= "
         if (\$this->$varName === null && ($conditional)) {";
@@ -793,7 +793,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
      * @return int             Count of related $className objects.
      * @throws PropelException
      */
-    public function count$relCol(Criteria \$criteria = null, \$distinct = false, PropelPDO \$con = null)
+    public function count$relCol(Criteria \$criteria = null, \$distinct = false, ?PropelPDO \$con = null)
     {";
 
         $script .= "
@@ -895,7 +895,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
      * @return array           {$className}[]
      * @throws PropelException
      */
-    public function get$relCol(\$criteria = null, PropelPDO \$con = null)
+    public function get$relCol(\$criteria = null, ?PropelPDO \$con = null)
     {";
 
         $script .= "
@@ -984,7 +984,7 @@ class PHP5ObjectNoCollectionBuilder extends PHP5ObjectBuilder
      * @return                 $className
      * @throws PropelException
      */
-    public function get" . $this->getRefFKPhpNameAffix($refFK, $plural = false) . "(PropelPDO \$con = null)
+    public function get" . $this->getRefFKPhpNameAffix($refFK, $plural = false) . "(?PropelPDO \$con = null)
     {
 ";
         $script .= "

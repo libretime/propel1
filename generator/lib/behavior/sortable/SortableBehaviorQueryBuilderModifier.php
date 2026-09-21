@@ -366,7 +366,7 @@ public function getMaxRankArray(" . ($useScope ? "\$scope, " : "") . "PropelPDO 
  *
  * @return    boolean true if the reordering took place, false if a database problem prevented it
  */
-public function reorder(array \$order, PropelPDO \$con = null)
+public function reorder(array \$order, ?PropelPDO \$con = null)
 {
     if (\$con === null) {
         \$con = Propel::getConnection($peerClassname::DATABASE_NAME);

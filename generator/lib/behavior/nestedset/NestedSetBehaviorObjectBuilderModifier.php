@@ -501,7 +501,7 @@ public function isAncestorOf(\$child)
  * @param      PropelPDO \$con Connection to use.
  * @return     bool
  */
-public function hasParent(PropelPDO \$con = null)
+public function hasParent(?PropelPDO \$con = null)
 {
     return \$this->getLevel() > 0;
 }
@@ -539,7 +539,7 @@ public function setParent(\$parent = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     mixed 		Propel object if exists else false
  */
-public function getParent(PropelPDO \$con = null)
+public function getParent(?PropelPDO \$con = null)
 {
     if (\$this->aNestedSetParent === null && \$this->hasParent()) {
         \$this->aNestedSetParent = {$this->queryClassname}::create()
@@ -564,7 +564,7 @@ public function getParent(PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     bool
  */
-public function hasPrevSibling(PropelPDO \$con = null)
+public function hasPrevSibling(?PropelPDO \$con = null)
 {
     if (!{$this->peerClassname}::isValid(\$this)) {
         return false;
@@ -592,7 +592,7 @@ public function hasPrevSibling(PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     mixed 		Propel object if exists else false
  */
-public function getPrevSibling(PropelPDO \$con = null)
+public function getPrevSibling(?PropelPDO \$con = null)
 {
     return $queryClassname::create()
         ->filterBy" . $this->getColumnPhpName('right_column') . "(\$this->getLeftValue() - 1)";
@@ -617,7 +617,7 @@ public function getPrevSibling(PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     bool
  */
-public function hasNextSibling(PropelPDO \$con = null)
+public function hasNextSibling(?PropelPDO \$con = null)
 {
     if (!{$this->peerClassname}::isValid(\$this)) {
         return false;
@@ -645,7 +645,7 @@ public function hasNextSibling(PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     mixed 		Propel object if exists else false
  */
-public function getNextSibling(PropelPDO \$con = null)
+public function getNextSibling(?PropelPDO \$con = null)
 {
     return $queryClassname::create()
         ->filterBy" . $this->getColumnPhpName('left_column') . "(\$this->getRightValue() + 1)";
@@ -747,7 +747,7 @@ public function hasChildren()
  * @param      PropelPDO \$con Connection to use.
  * @return     array     List of $objectClassname objects
  */
-public function getChildren(\$criteria = null, PropelPDO \$con = null)
+public function getChildren(\$criteria = null, ?PropelPDO \$con = null)
 {
     if (null === \$this->collNestedSetChildren || null !== \$criteria) {
         if (\$this->isLeaf() || (\$this->isNew() && null === \$this->collNestedSetChildren)) {
@@ -782,7 +782,7 @@ public function getChildren(\$criteria = null, PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     int       Number of children
  */
-public function countChildren(\$criteria = null, PropelPDO \$con = null)
+public function countChildren(\$criteria = null, ?PropelPDO \$con = null)
 {
     if (null === \$this->collNestedSetChildren || null !== \$criteria) {
         if (\$this->isLeaf() || (\$this->isNew() && null === \$this->collNestedSetChildren)) {
@@ -811,7 +811,7 @@ public function countChildren(\$criteria = null, PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     array 		List of $objectClassname objects
  */
-public function getFirstChild(\$query = null, PropelPDO \$con = null)
+public function getFirstChild(\$query = null, ?PropelPDO \$con = null)
 {
     if (\$this->isLeaf()) {
         return array();
@@ -837,7 +837,7 @@ public function getFirstChild(\$query = null, PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     array 		List of $objectClassname objects
  */
-public function getLastChild(\$query = null, PropelPDO \$con = null)
+public function getLastChild(\$query = null, ?PropelPDO \$con = null)
 {
     if (\$this->isLeaf()) {
         return array();
@@ -865,7 +865,7 @@ public function getLastChild(\$query = null, PropelPDO \$con = null)
  *
  * @return     array 		List of $objectClassname objects
  */
-public function getSiblings(\$includeNode = false, \$query = null, PropelPDO \$con = null)
+public function getSiblings(\$includeNode = false, \$query = null, ?PropelPDO \$con = null)
 {
     if (\$this->isRoot()) {
         return array();
@@ -895,7 +895,7 @@ public function getSiblings(\$includeNode = false, \$query = null, PropelPDO \$c
  * @param      PropelPDO \$con Connection to use.
  * @return     array 		List of $objectClassname objects
  */
-public function getDescendants(\$query = null, PropelPDO \$con = null)
+public function getDescendants(\$query = null, ?PropelPDO \$con = null)
 {
     if (\$this->isLeaf()) {
         return array();
@@ -921,7 +921,7 @@ public function getDescendants(\$query = null, PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     int 		Number of descendants
  */
-public function countDescendants(\$query = null, PropelPDO \$con = null)
+public function countDescendants(\$query = null, ?PropelPDO \$con = null)
 {
     if (\$this->isLeaf()) {
         // save one query
@@ -947,7 +947,7 @@ public function countDescendants(\$query = null, PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     array 		List of $objectClassname objects
  */
-public function getBranch(\$query = null, PropelPDO \$con = null)
+public function getBranch(\$query = null, ?PropelPDO \$con = null)
 {
     return $queryClassname::create(null, \$query)
         ->branchOf(\$this)
@@ -970,7 +970,7 @@ public function getBranch(\$query = null, PropelPDO \$con = null)
  * @param      PropelPDO \$con Connection to use.
  * @return     array 		List of $objectClassname objects
  */
-public function getAncestors(\$query = null, PropelPDO \$con = null)
+public function getAncestors(\$query = null, ?PropelPDO \$con = null)
 {
     if (\$this->isRoot()) {
         // save one query
@@ -1208,7 +1208,7 @@ public function insertAsNextSiblingOf(\$sibling)
  *
  * @return     $objectClassname The current Propel object
  */
-public function moveToFirstChildOf(\$parent, PropelPDO \$con = null)
+public function moveToFirstChildOf(\$parent, ?PropelPDO \$con = null)
 {
     if (!\$this->isInTree()) {
         throw new PropelException('A $objectClassname object must be already in the tree to be moved. Use the insertAsFirstChildOf() instead.');
@@ -1238,7 +1238,7 @@ public function moveToFirstChildOf(\$parent, PropelPDO \$con = null)
  *
  * @return     $objectClassname The current Propel object
  */
-public function moveToLastChildOf(\$parent, PropelPDO \$con = null)
+public function moveToLastChildOf(\$parent, ?PropelPDO \$con = null)
 {
     if (!\$this->isInTree()) {
         throw new PropelException('A $objectClassname object must be already in the tree to be moved. Use the insertAsLastChildOf() instead.');
@@ -1268,7 +1268,7 @@ public function moveToLastChildOf(\$parent, PropelPDO \$con = null)
  *
  * @return     $objectClassname The current Propel object
  */
-public function moveToPrevSiblingOf(\$sibling, PropelPDO \$con = null)
+public function moveToPrevSiblingOf(\$sibling, ?PropelPDO \$con = null)
 {
     if (!\$this->isInTree()) {
         throw new PropelException('A $objectClassname object must be already in the tree to be moved. Use the insertAsPrevSiblingOf() instead.');
@@ -1301,7 +1301,7 @@ public function moveToPrevSiblingOf(\$sibling, PropelPDO \$con = null)
  *
  * @return     $objectClassname The current Propel object
  */
-public function moveToNextSiblingOf(\$sibling, PropelPDO \$con = null)
+public function moveToNextSiblingOf(\$sibling, ?PropelPDO \$con = null)
 {
     if (!\$this->isInTree()) {
         throw new PropelException('A $objectClassname object must be already in the tree to be moved. Use the insertAsNextSiblingOf() instead.');
@@ -1334,7 +1334,7 @@ public function moveToNextSiblingOf(\$sibling, PropelPDO \$con = null)
  * @param      int	\$levelDelta Delta to add to the levels
  * @param      PropelPDO \$con		Connection to use.
  */
-protected function moveSubtreeTo(\$destLeft, \$levelDelta" . ($this->behavior->useScope() ? ", \$targetScope = null" : "") . ", PropelPDO \$con = null)
+protected function moveSubtreeTo(\$destLeft, \$levelDelta" . ($this->behavior->useScope() ? ", \$targetScope = null" : "") . ", ?PropelPDO \$con = null)
 {
     \$preventDefault = false;
     \$left  = \$this->getLeftValue();
@@ -1442,7 +1442,7 @@ protected function moveSubtreeTo(\$destLeft, \$levelDelta" . ($this->behavior->u
  *
  * @return     int 		number of deleted nodes
  */
-public function deleteDescendants(PropelPDO \$con = null)
+public function deleteDescendants(?PropelPDO \$con = null)
 {
     if (\$this->isLeaf()) {
         // save one query
@@ -1519,7 +1519,7 @@ public function createRoot()
  * @deprecated since 1.5
  * @see        getParent
  */
-public function retrieveParent(PropelPDO \$con = null)
+public function retrieveParent(?PropelPDO \$con = null)
 {
     return \$this->getParent(\$con);
 }
@@ -1541,7 +1541,7 @@ public function setParentNode(\$parent = null)
  * @deprecated since 1.5
  * @see        setParent
  */
-public function getNumberOfDescendants(PropelPDO \$con = null)
+public function getNumberOfDescendants(?PropelPDO \$con = null)
 {
     return \$this->countDescendants(null, \$con);
 }
@@ -1552,7 +1552,7 @@ public function getNumberOfDescendants(PropelPDO \$con = null)
  * @deprecated since 1.5
  * @see        setParent
  */
-public function getNumberOfChildren(PropelPDO \$con = null)
+public function getNumberOfChildren(?PropelPDO \$con = null)
 {
     return \$this->countChildren(null, \$con);
 }
@@ -1563,7 +1563,7 @@ public function getNumberOfChildren(PropelPDO \$con = null)
  * @deprecated since 1.5
  * @see        getParent
  */
-public function retrievePrevSibling(PropelPDO \$con = null)
+public function retrievePrevSibling(?PropelPDO \$con = null)
 {
     return \$this->getPrevSibling(\$con);
 }
@@ -1574,7 +1574,7 @@ public function retrievePrevSibling(PropelPDO \$con = null)
  * @deprecated since 1.5
  * @see        getParent
  */
-public function retrieveNextSibling(PropelPDO \$con = null)
+public function retrieveNextSibling(?PropelPDO \$con = null)
 {
     return \$this->getNextSibling(\$con);
 }
@@ -1585,7 +1585,7 @@ public function retrieveNextSibling(PropelPDO \$con = null)
  * @deprecated since 1.5
  * @see        getParent
  */
-public function retrieveFirstChild(PropelPDO \$con = null)
+public function retrieveFirstChild(?PropelPDO \$con = null)
 {
     return \$this->getFirstChild(null, \$con);
 }
@@ -1596,7 +1596,7 @@ public function retrieveFirstChild(PropelPDO \$con = null)
  * @deprecated since 1.5
  * @see        getParent
  */
-public function retrieveLastChild(PropelPDO \$con = null)
+public function retrieveLastChild(?PropelPDO \$con = null)
 {
     return \$this->getLastChild(null, \$con);
 }
@@ -1607,7 +1607,7 @@ public function retrieveLastChild(PropelPDO \$con = null)
  * @deprecated since 1.5
  * @see        getAncestors
  */
-public function getPath(PropelPDO \$con = null)
+public function getPath(?PropelPDO \$con = null)
 {
     \$path = \$this->getAncestors(null, \$con);
     \$path []= \$this;

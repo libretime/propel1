@@ -735,7 +735,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @param      PropelPDO \$con
      * @return int Number of matching rows.
      */
-    public static function doCount(Criteria \$criteria, \$distinct = false, PropelPDO \$con = null)
+    public static function doCount(Criteria \$criteria, \$distinct = false, ?PropelPDO \$con = null)
     {
         // we may modify criteria, so copy it first
         \$criteria = clone \$criteria;
@@ -795,7 +795,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectOne(Criteria \$criteria, PropelPDO \$con = null)
+    public static function doSelectOne(Criteria \$criteria, ?PropelPDO \$con = null)
     {
         \$critcopy = clone \$criteria;
         \$critcopy->setLimit(1);
@@ -825,7 +825,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelect(Criteria \$criteria, PropelPDO \$con = null)
+    public static function doSelect(Criteria \$criteria, ?PropelPDO \$con = null)
     {
         return " . $this->getPeerClassname() . "::populateObjects(" . $this->getPeerClassname() . "::doSelectStmt(\$criteria, \$con));
     }";
@@ -853,7 +853,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @return PDOStatement The executed PDOStatement object.
      * @see        " . $this->basePeerClassname . "::doSelect()
      */
-    public static function doSelectStmt(Criteria \$criteria, PropelPDO \$con = null)
+    public static function doSelectStmt(Criteria \$criteria, ?PropelPDO \$con = null)
     {
         if (\$con === null) {
             \$con = Propel::getConnection(" . $this->getPeerClassname() . "::DATABASE_NAME, Propel::CONNECTION_READ);
@@ -1452,7 +1452,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doInsert(\$values, PropelPDO \$con = null)
+    public static function doInsert(\$values, ?PropelPDO \$con = null)
     {
         if (\$con === null) {
             \$con = Propel::getConnection(" . $this->getPeerClassname() . "::DATABASE_NAME, Propel::CONNECTION_WRITE);
@@ -1527,7 +1527,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doUpdate(\$values, PropelPDO \$con = null)
+    public static function doUpdate(\$values, ?PropelPDO \$con = null)
     {
         if (\$con === null) {
             \$con = Propel::getConnection(" . $this->getPeerClassname() . "::DATABASE_NAME, Propel::CONNECTION_WRITE);
@@ -1582,7 +1582,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @return int             The number of affected rows (if supported by underlying database driver).
      * @throws PropelException
      */
-    public static function doDeleteAll(PropelPDO \$con = null)
+    public static function doDeleteAll(?PropelPDO \$con = null)
     {
         if (\$con === null) {
             \$con = Propel::getConnection(" . $this->getPeerClassname() . "::DATABASE_NAME, Propel::CONNECTION_WRITE);
@@ -1639,7 +1639,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-     public static function doDelete(\$values, PropelPDO \$con = null)
+     public static function doDelete(\$values, ?PropelPDO \$con = null)
      {
         if (\$con === null) {
             \$con = Propel::getConnection(" . $this->getPeerClassname() . "::DATABASE_NAME, Propel::CONNECTION_WRITE);
@@ -2017,7 +2017,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @param      PropelPDO \$con the connection to use
      * @return " . $this->getObjectClassname() . "
      */
-    public static function " . $this->getRetrieveMethodName() . "(\$pk, PropelPDO \$con = null)
+    public static function " . $this->getRetrieveMethodName() . "(\$pk, ?PropelPDO \$con = null)
     {
 
         if (null !== (\$obj = " . $this->getPeerClassname() . "::getInstanceFromPool(" . $this->getInstancePoolKeySnippet('$pk') . "))) {
@@ -2056,7 +2056,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function " . $this->getRetrieveMethodName() . "s(\$pks, PropelPDO \$con = null)
+    public static function " . $this->getRetrieveMethodName() . "s(\$pks, ?PropelPDO \$con = null)
     {
         if (\$con === null) {
             \$con = Propel::getConnection(" . $this->getPeerClassname() . "::DATABASE_NAME, Propel::CONNECTION_READ);
@@ -2110,7 +2110,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
 
         $script .= implode(', ', $php);
 
-        $script .= ", PropelPDO \$con = null) {
+        $script .= ", ?PropelPDO \$con = null) {
         \$_instancePoolKey = " . $this->getInstancePoolKeySnippet($php) . ";";
         $script .= "
          if (null !== (\$obj = " . $this->getPeerClassname() . "::getInstanceFromPool(\$_instancePoolKey))) {
@@ -2420,7 +2420,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @param      String    \$join_behavior the type of joins to use, defaults to $join_behavior
      * @return int Number of matching rows.
      */
-    public static function doCountJoin" . $thisTableObjectBuilder->getFKPhpNameAffix($fk, $plural = false) . "(Criteria \$criteria, \$distinct = false, PropelPDO \$con = null, \$join_behavior = $join_behavior)
+    public static function doCountJoin" . $thisTableObjectBuilder->getFKPhpNameAffix($fk, $plural = false) . "(Criteria \$criteria, \$distinct = false, ?PropelPDO \$con = null, \$join_behavior = $join_behavior)
     {
         // we're going to modify criteria, so copy it first
         \$criteria = clone \$criteria;
@@ -2662,7 +2662,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @param      String    \$join_behavior the type of joins to use, defaults to $join_behavior
      * @return int Number of matching rows.
      */
-    public static function doCountJoinAll(Criteria \$criteria, \$distinct = false, PropelPDO \$con = null, \$join_behavior = $join_behavior)
+    public static function doCountJoinAll(Criteria \$criteria, \$distinct = false, ?PropelPDO \$con = null, \$join_behavior = $join_behavior)
     {
         // we're going to modify criteria, so copy it first
         \$criteria = clone \$criteria;
@@ -2948,7 +2948,7 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
      * @param      String    \$join_behavior the type of joins to use, defaults to $join_behavior
      * @return int Number of matching rows.
      */
-    public static function doCountJoinAllExcept" . $thisTableObjectBuilder->getFKPhpNameAffix($fk, $plural = false) . "(Criteria \$criteria, \$distinct = false, PropelPDO \$con = null, \$join_behavior = $join_behavior)
+    public static function doCountJoinAllExcept" . $thisTableObjectBuilder->getFKPhpNameAffix($fk, $plural = false) . "(Criteria \$criteria, \$distinct = false, ?PropelPDO \$con = null, \$join_behavior = $join_behavior)
     {
         // we're going to modify criteria, so copy it first
         \$criteria = clone \$criteria;
