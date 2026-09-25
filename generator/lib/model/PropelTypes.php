@@ -358,7 +358,7 @@ class PropelTypes
      */
     public static function isPhpPrimitiveType($phpType)
     {
-        return in_array($phpType, array("boolean", "int", "double", "float", "string"));
+        return in_array($phpType, array("boolean", "bool", "int", "double", "float", "string"));
     }
 
     /**
@@ -370,7 +370,7 @@ class PropelTypes
      */
     public static function isPhpPrimitiveNumericType($phpType)
     {
-        return in_array($phpType, array("boolean", "int", "double", "float"));
+        return in_array($phpType, array("boolean", "bool", "int", "double", "float"));
     }
 
     /**
