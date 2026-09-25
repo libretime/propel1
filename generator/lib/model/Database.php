@@ -301,7 +301,7 @@ class Database extends ScopedElement
      */
     public function setHeavyIndexing($v)
     {
-        $this->heavyIndexing = (boolean) $v;
+        $this->heavyIndexing = (bool) $v;
     }
 
     /**

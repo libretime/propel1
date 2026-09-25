@@ -188,7 +188,7 @@ class PropelSQLExec extends AbstractPropelTask
      */
     public function setAutoCommit($autocommit)
     {
-        $this->autocommit = (boolean) $autocommit;
+        $this->autocommit = (bool) $autocommit;
     }
 
     /**
